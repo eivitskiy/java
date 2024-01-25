@@ -4,20 +4,16 @@ public class Circle implements GeometricFigureInterface {
 	private double radius;
 
 	public Circle(double radius) throws Exception {
-		if (radius <= 0) {
-			throw new Exception("Некорректное значение радиуса круга");
-		}
-
-		this.setRadius(radius);
+		setRadius(radius);
 	}
 
 	public double area()
 	{
-		return Math.PI * Math.pow(this.getRadius(), 2);
+		return Math.PI * Math.pow(getRadius(), 2);
 	}
 
 	public double perimeter() {
-		return 2 * Math.PI * this.getRadius();
+		return 2 * Math.PI * getRadius();
 	}
 
 	public double getRadius()
@@ -25,8 +21,12 @@ public class Circle implements GeometricFigureInterface {
 		return this.radius;
 	}
 
-	public void setRadius(double radius)
+	public void setRadius(double radius) throws Exception
 	{
+		if (radius <= 0) {
+			throw new Exception("Некорректное значение радиуса круга");
+		}
+
 		this.radius = radius;
 	}
 }

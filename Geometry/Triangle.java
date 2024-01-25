@@ -6,8 +6,9 @@ public class Triangle implements GeometricFigureInterface {
 	private double c;
 
 	public Triangle(double a, double b, double c) throws Exception {
-		this.checkValues(a, b, c);
+		this.checkSidesLengths(a, b, c);	// здесь проверим что суммы 2х сторон больше 3й стороны
 
+		// в каждом сеттере есть проверка на минимальную длину
 	    this.setA(a);
 	    this.setB(b);
 	    this.setC(c);
@@ -29,8 +30,10 @@ public class Triangle implements GeometricFigureInterface {
 		return this.a;
 	}
 
-	public void setA(double a)
+	public void setA(double a) throws Exception
 	{
+		checkMinLength(a);
+
 		this.a = a;
 	}
 	
@@ -39,8 +42,10 @@ public class Triangle implements GeometricFigureInterface {
 		return this.b;
 	}
 
-	public void setB(double b)
+	public void setB(double b) throws Exception
 	{
+		checkMinLength(b);
+
 		this.b = b;
 	}
 	
@@ -49,33 +54,45 @@ public class Triangle implements GeometricFigureInterface {
 		return this.c;
 	}
 
-	public void setC(double c)
+	public void setC(double c) throws Exception
 	{
+		checkMinLength(c);
+
 		this.c = c;
 	}
 
-	private void checkValues(double a, double b, double c) throws Exception
+	/*
+	 * проверяем что сумма 2х любых сторон
+	 * больше 3й
+	 */
+	private void checkSidesLengths(double a, double b, double c) throws Exception
 	{
 		boolean correct = true;
 
-		if (a <= 0 || b <= 0 || c <= 0) {
+		if (a + b <= c) {
 			correct = false;
 		}
 
-		if (a + b < c) {
+		if (b + c <= a) {
 			correct = false;
 		}
 
-		if (b + c < a) {
-			correct = false;
-		}
-
-		if (c + a < b) {
+		if (c + a <= b) {
 			correct = false;
 		}
 
 		if (false == correct) {
 			throw new Exception("Некорректные значения сторон треугольника");
+		}
+	}
+
+	/*
+	 * проверяем что длина стороны больше 0
+	 */
+	private void checkMinLength(double length) throws Exception
+	{
+		if (length <= 0) {
+			throw new Exception("Длина стороны должна быть больше 0");
 		}
 	}
 }

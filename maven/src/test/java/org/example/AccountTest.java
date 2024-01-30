@@ -1,5 +1,6 @@
 package org.example;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,11 +28,18 @@ class AccountTest {
     }
 
     @Test
-    void getLastName() {
+    void getLastName() throws Exception {
         String lastName = "Двенятин";
         account.setLastName(lastName);
 
         assertEquals(lastName, account.getLastName());
+
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
+            //здесь размещаем метод, который должен бросить исключение
+            account.throwableMethod();
+        });
+
+        Assertions.assertEquals("qwerty", thrown.getMessage());
     }
 
     @Test

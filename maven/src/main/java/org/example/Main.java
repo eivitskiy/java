@@ -7,5 +7,7 @@ public class Main {
         account.setLastName("Двенятин");
 
         System.out.println(account.getFullName());
+
+        System.out.println(Account.generateRandomString());
     }
 }
